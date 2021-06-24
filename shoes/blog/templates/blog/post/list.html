@@ -12,6 +12,7 @@
     Published {{ post.publish }} by {{ post.author }}
 </p>
 <hr>
+<h6>Visits : <b><i> {{post.visits}} </i></b></h6>
 {{ post.body|truncatewords:30|linebreaks }}
 <hr>
 {% endfor %}

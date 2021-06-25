@@ -5,8 +5,49 @@
 <p class="date">
     Published {{ post.publish }} by {{ post.author }}- Visits : {{post.visits}}
 </p>
+{% with comments.count as total_comments %}
+<h2>
+تعداد نظرات : {{ total_comments }} 
+</h2>
+{% endwith %}
+
 خلاصه :
 <br/>
 {{post.summery}}
 {{ post.body|linebreaks }}
+
+
+<h2>نظرات مشابه</h2>
+{% for post in similar_posts %}
+<p>
+<a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+</p>
+{% empty %}
+مطلب مشابهی در حال حاضر وجود ندارد.
+{% endfor %}
+
+{% for comment in comments %}
+<div class="comment">
+<p class="info">
+Comment {{ forloop.counter }} by {{ comment.name }}
+{{ comment.created }}
+</p>
+
+
+
+{{ comment.body|linebreaks }}
+</div>
+{% empty %}
+<p>هیچ نظری ثبت نشده است.</p>
+{% endfor %}
+{% if new_comment %}
+<h2>نظر شما با موفقیت ثبت شد.</h2>
+{% else %}
+<h2>نظر جدید</h2>
+<form method="post">
+{{ comment_form.as_p }}
+{% csrf_token %}
+<p><input type="submit" value="Add comment"></p>
+</form>
+{% endif %}
 {% endblock %}

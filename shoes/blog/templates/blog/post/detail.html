@@ -9,4 +9,11 @@
 <br/>
 {{post.summery}}
 {{ post.body|linebreaks }}
+
+<hr>
+<p>
+<a href="{% url "blog:post_share" post.id %}">
+پست را به اشتراک بگذارید.
+</a>
+</p>
 {% endblock %}

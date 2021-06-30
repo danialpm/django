@@ -1,32 +1,880 @@
-{% extends "blog/base.html" %}
-{% block title %}Post List{% endblock %}
-{% block content %}
-<h1>My Blog</h1>
-{% if tag %}
-    <h2>فهرست پست های  "{{ tag.name }}"</h2>
-{% endif %}
-{% for post in posts %}
-<h2>
-    <a href="{{ post.get_absolute_url }}">
-    {{ post.title }} 
-    </a>   
-</h2>
-<p class="date">
-    Published {{ post.publish }} by {{ post.author }}
-</p>
-<p class="tags">
-برچسب ها : 
-    {% for tag in post.tags.all %}
-        <a href="{% url "blog:post_list_by_tag" tag.slug %}">
-        {{ tag.name }}
-    </a>
-    {% if not forloop.last %}, {% endif %}
-    {% endfor %}
 
-<hr>
-<h6>Visits : <b><i> {{post.visits}} </i></b></h6>
-{{ post.body|truncatewords:30|linebreaks }}
-<hr>
-{% endfor %}
-{% include "pagination.html" with page=posts %}
-{% endblock %}
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+    <link href="{% static 'css/oil-green.css' %}" rel="stylesheet">
+    <link href="{% static 'css/grass-green.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+
+
+
+    <div class="master-wrapper">
+     
+        <!--  ==========  -->
+        <!--  = Header =  -->
+        <!--  ==========  -->
+        <header id="header">
+            <div class="container">
+                <div class="row">
+                    
+                    <!--  ==========  -->
+                    <!--  = Logo =  -->
+                    <!--  ==========  -->
+                    <div class="span7">
+                        <a class="brand" href="">
+                            <img src="static/images/logo.png" alt="Webmarket Logo" width="48" height="48" /> 
+                            <span class="pacifico">کفش فروش</span> 
+                            <span class="tagline">فروشگاه کفش</span> 
+                        </a>
+                    </div>
+                    
+                    <!--  ==========  -->
+                    <!--  = Social Icons =  -->
+                    <!--  ==========  -->
+                   
+                </div>
+            </div>
+        </header>
+        
+        <!--  ==========  -->
+        <!--  = Main Menu / navbar =  -->
+        <!--  ==========  -->
+        <div class="navbar navbar-static-top" id="stickyNavbar">
+          <div class="navbar-inner">
+            <div class="container">
+              <div class="row">
+                <div class="span9">
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    
+                    <!--  ==========  -->
+                    <!--  = Menu =  -->
+                    <!--  ==========  -->
+                    <div class="nav-collapse collapse">
+                      <ul class="nav" id="mainNavigation">
+                        <li class="dropdown active">
+                            <a href="index.html" class="dropdown-toggle"> خانه <b class="caret"></b> </a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown active">
+                                    <a href=""><i class="icon-caret-left pull-right visible-desktop"></i> انواع کفش</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="active"><a href="">مردانه</a></li>
+                                        <li><a href="">زنانه</a></li>
+                                        <li><a href="">مجلسی</a></li>
+                                        <li><a href="">ورزشی</a></li>
+                                    </ul>
+                                </li>
+                               
+                            </ul>
+                        </li>
+                        
+                        <li class="dropdown">
+                            <a href="shop.html" class="dropdown-toggle"> فروشگاه <b class="caret"></b> </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="shop.html">تست</a></li>
+                                <li><a href="shop-no-sidebar.html"> تست</a></li>
+                                <li><a href="product.html"> تست</a></li>
+                                <li><a href="shop-search.html">تست </a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="blog.html" class="dropdown-toggle">بلاگ <b class="caret"></b> </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="blog.html">  تست </a></li>
+                                <li><a href="blog-single.html">تست </a></li>
+                                <li><a href="blog-search.html">تست </a></li>
+                                <li><a href="404.html">صفحه 404</a></li>
+                            </ul>
+                        </li>
+                        
+                                   
+                        </li>
+                        <li><a href="">درباره ما</a></li>
+                        <li><a href="">تماس با ما</a></li>
+                      </ul>
+                      
+                      <!--  ==========  -->
+                      <!--  = Search form =  -->
+                      <!--  ==========  -->
+                      <form class="navbar-form pull-right" action="#" method="get">
+                          <button type="submit"><span class="icon-search"></span></button>
+                          <input type="text" class="span1" name="search" id="navSearchInput">
+                      </form>
+                    </div><!-- /.nav-collapse -->
+                </div>
+                
+                <!--  ==========  -->
+                <!--  = Cart =  -->
+                <!--  ==========  -->
+                <div class="span3">
+                    <div class="cart-container" id="cartContainer">
+                        <div class="cart">
+                            <p class="items">سبد خرید <span class="dark-clr">(3)</span></p>
+                            <p class="dark-clr hidden-tablet"></p>
+                            <a href="" class="btn btn-danger">
+                                <!-- <span class="icon icons-cart"></span> -->
+                                <i class="icon-shopping-cart"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div> <!-- /cart -->
+              </div>
+            </div>
+          </div>
+        </div> <!-- /main menu -->
+        
+         
+        
+            
+        
+        <!--  ==========  -->
+        <!--  = Slider Revolution =  -->
+        <!--  ==========  -->
+        <div class="fullwidthbanner-container">
+            <div class="fullwidthbanner">
+                <ul>
+                    <li data-transition="premium-random" data-slotamount="3">
+                        <img src="static/images/dummy/slides/1/slide.jpg" alt="slider img" width="1400" height="377" />
+                        
+                        <!-- baloons -->
+                        <div class="caption lft ltt"
+                            data-x="570" 
+                            data-y="50"
+                            data-speed="4000" 
+                            data-start="1000" 
+                            data-easing="easeOutElastic">
+                            <img src="static/images/dummy/slides/1/baloon1.png" alt="baloon" width="135" height="186" />
+                        </div>
+                        
+                        <div class="caption lft ltt"
+                            data-x="770" 
+                            data-y="60"
+                            data-speed="4000" 
+                            data-start="1200" 
+                            data-easing="easeOutElastic">
+                            <img src="static/images/dummy/slides/1/baloon3.png" alt="baloon" width="40" height="55" />
+                        </div>
+                        
+                        <div class="caption lft ltt"
+                            data-x="870" 
+                            data-y="80"
+                            data-speed="4000" 
+                            data-start="1500" 
+                            data-easing="easeOutElastic">
+                            <img src="static/images/dummy/slides/1/baloon2.png" alt="baloon" width="60" height="83" />
+                        </div>
+                        
+                        <!-- texts -->
+                        <div class="caption lfl big_theme"
+                            data-x="120" 
+                            data-y="120"
+                            data-speed="1000" 
+                            data-start="500" 
+                            data-easing="easeInOutBack">
+                            با کفش فروش آشنا شوید
+                        </div>
+                        
+                        <div class="caption lfl small_theme"
+                            data-x="120" 
+                            data-y="190"
+                            data-speed="1000" 
+                            data-start="700" 
+                            data-easing="easeInOutBack">
+                           با کفش فروش آشنا شوید
+                        </div>
+                        
+                        <a href="features.html" class="caption lfl btn btn-primary btn_theme"
+                            data-x="120" 
+                            data-y="260"
+                            data-speed="1000" 
+                            data-start="900" 
+                            data-easing="easeInOutBack">
+                            تمامی امکانات قالب
+                        </a>
+                    </li><!-- /slide -->
+                    
+                    <li data-transition="premium-random" data-slotamount="3">
+                        <img src="static/images/dummy/slides/2/slide.jpg" alt="slider img" width="1400" height="377" />
+                        
+                        <!-- woman -->
+                        <div class="caption lfb ltb"
+                            data-x="800" 
+                            data-y="50"
+                            data-speed="1000" 
+                            data-start="1000" 
+                            data-easing="easeInOutCubic">
+                            <img src="static/images/dummy/slides/2/woman.png" alt="woman" width="361" height="374" />
+                        </div>
+                        
+                        <!-- plane -->
+                        <div class="caption lfl str"
+                            data-x="400" 
+                            data-y="20"
+                            data-speed="10000" 
+                            data-start="1000" 
+                            data-easing="linear">
+                            <img src="static/images/dummy/slides/2/plane.png" alt="aircraft" width="117" height="28" />
+                        </div>
+                        
+                        <!-- texts -->
+                        <div class="caption lfl big_theme"
+                            data-x="120" 
+                            data-y="120"
+                            data-speed="1000" 
+                            data-start="500" 
+                            data-easing="easeInOutBack">
+                            Slider Revolution
+                        </div>
+                        
+                        <div class="caption lfl small_theme"
+                            data-x="120" 
+                            data-y="190"
+                            data-speed="1000" 
+                            data-start="700" 
+                            data-easing="easeInOutBack">
+                            
+                        </div>
+                        
+                        <a href="features.html" class="caption lfl btn btn-primary btn_theme"
+                            data-x="120" 
+                            data-y="260"
+                            data-speed="1000" 
+                            data-start="900" 
+                            data-easing="easeInOutBack">
+                           
+                        </a>
+                    </li><!-- /slide -->
+                    
+                    <li data-transition="premium-random" data-slotamount="3">
+                        <img src="static/images/dummy/slides/3/slide.jpg" alt="slider img" width="1400" height="377" />
+                        
+                        <!-- phone -->
+                        <div class="caption sfr fadeout"
+                            data-x="950" 
+                            data-y="77"
+                            data-speed="1000" 
+                            data-start="2500" 
+                            data-easing="easeInOutCubic">
+                            <img src="static/images/dummy/slides/3/phone.png" alt="phone in a hand" width="495" height="377" />
+                        </div>
+                        
+                        <!-- texts -->
+                        <div class="caption lfl big_theme"
+                            data-x="120" 
+                            data-y="120"
+                            data-speed="1000" 
+                            data-start="500" 
+                            data-easing="easeInOutBack">
+                        </div>
+                        
+                        <div class="caption lfl small_theme"
+                            data-x="120" 
+                            data-y="190"
+                            data-speed="1000" 
+                            data-start="700" 
+                            data-easing="easeInOutBack">
+                        </div>
+                        
+                        <a href="icons.html" class="caption lfl btn btn-primary btn_theme"
+                            data-x="120" 
+                            data-y="260"
+                            data-speed="1000" 
+                            data-start="900" 
+                            data-easing="easeInOutBack">
+                        </a>
+                    </li><!-- /slide -->
+                    
+                    <li data-transition="premium-random" data-slotamount="3">
+                        <img src="static/images/dummy/slides/4/slide.jpg" alt="slider img" width="1400" height="377" />
+                        
+                        <!-- faces -->
+                        <div class="caption lft ltt"
+                            data-x="-150" 
+                            data-y="0"
+                            data-speed="300" 
+                            data-start="2000" 
+                            data-easing="easeInOutCubic">
+                            <img src="static/images/dummy/slides/4/person1.png" alt="satisfied customer" width="108" height="204" />
+                        </div>
+                        <div class="caption lft ltt"
+                            data-x="0" 
+                            data-y="0"
+                            data-speed="300" 
+                            data-start="2200" 
+                            data-easing="easeInOutCubic">
+                            <img src="static/images/dummy/slides/4/person2.png" alt="satisfied customer" width="108" height="321" />
+                        </div>
+                        <div class="caption lft ltt"
+                            data-x="500" 
+                            data-y="0"
+                            data-speed="300" 
+                            data-start="2400" 
+                            data-easing="easeInOutCubic">
+                            <img src="static/images/dummy/slides/4/person3.png" alt="satisfied customer" width="108" height="139" />
+                        </div>
+                        <div class="caption lft ltt"
+                            data-x="720" 
+                            data-y="0"
+                            data-speed="300" 
+                            data-start="2600" 
+                            data-easing="easeInOutCubic">
+                            <img src="static/images/dummy/slides/4/person4.png" alt="satisfied customer" width="108" height="191" />
+                        </div>
+                        <div class="caption lft ltt"
+                            data-x="940" 
+                            data-y="0"
+                            data-speed="300" 
+                            data-start="2800" 
+                            data-easing="easeInOutCubic">
+                            <img src="static/images/dummy/slides/4/person5.png" alt="satisfied customer" width="108" height="139" />
+                        </div>
+                        <div class="caption lft ltt"
+                            data-x="1200" 
+                            data-y="0"
+                            data-speed="300" 
+                            data-start="3000" 
+                            data-easing="easeInOutCubic">
+                            <img src="static/images/dummy/slides/4/person6.png" alt="satisfied customer" width="108" height="179" />
+                        </div>
+                        <div class="caption lft ltt"
+                            data-x="1350" 
+                            data-y="0"
+                            data-speed="300" 
+                            data-start="3200" 
+                            data-easing="easeInOutCubic">
+                            <img src="static/images/dummy/slides/4/person7.png" alt="satisfied customer" width="108" height="133" />
+                        </div>
+                        
+                        <!-- texts -->
+                        <div class="caption lfl big_theme"
+                            data-x="120" 
+                            data-y="140"
+                            data-speed="1000" 
+                            data-start="500" 
+                            data-easing="easeInOutBack">
+                            بیش از 1000 مشتری خوشنود
+                        </div>
+                        
+                        <div class="caption lfl small_theme"
+                            data-x="120" 
+                            data-y="210"
+                            data-speed="1000" 
+                            data-start="700" 
+                            data-easing="easeInOutBack">
+                            پروفایل ما را ببینید در <a href="http://www.acdev" target="_blank">acdev</a>! 
+                        </div>
+                        
+                        <a href="http://www.acdev" class="caption lfl btn btn-primary btn_theme"
+                            data-x="120" 
+                            data-y="280"
+                            data-speed="1000" 
+                            data-start="900" 
+                            data-easing="easeInOutBack">
+                            به خوبی شما را پشتیبانی میکنیم
+                        </a>
+                    </li><!-- /slide -->
+                </ul>
+                <div class="tp-bannertimer"></div>
+            </div>
+            <!--  ==========  -->
+            <!--  = Nav Arrows =  -->
+            <!--  ==========  -->
+            <div id="sliderRevLeft"><i class="icon-chevron-left"></i></div>
+            <div id="sliderRevRight"><i class="icon-chevron-right"></i></div>
+        </div> <!-- /slider revolution -->
+    
+        <!--  ==========  -->
+        <!--  = Main container =  -->
+        <!--  ==========  -->
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div class="push-up over-slider blocks-spacer">
+                        
+                        <!--  ==========  -->
+                        <!--  = Three Banners =  -->
+                        <!--  ==========  -->
+                        <div class="row">
+                            <div class="span4">
+                                <a href="#" class="btn btn-block banner">
+                                    <span class="title"><span class="light">فروش</span> تابستانی</span>
+                                    <em>تا 60% تخفیف روی کفش ها</em>
+                                </a>
+                            </div>
+                            <div class="span4">
+                                <a href="#" class="btn btn-block colored banner">
+                                    <span class="title"><span class="light">ارسال</span> رایگان</span>
+                                    <em>برای خرید های بیش از 69000 تومان</em>
+                                </a>
+                            </div>
+                            <div class="span4">
+                                <a href="#" class="btn btn-block banner">
+                                    <span class="title"><span class="light">محصولات</span> جدید</span>
+                                    <em>از محصولات جدید دیدن کنید.</em>
+                                </a>
+                            </div>
+                        </div> <!-- /three banners -->
+                    </div>
+                </div>
+            </div>
+            
+            <!--  ==========  -->
+            <!--  = Featured Items =  -->
+            <!--  ==========  -->
+         
+        <!--  ==========  -->
+        <!--  = New Products =  -->
+        <!--  ==========  -->
+        <div class="boxed-area blocks-spacer">
+            <div class="container">
+                
+                <!--  ==========  -->
+                <!--  = Title =  -->
+                <!--  ==========  -->
+                <div class="row">
+                    <div class="span12">
+                        <div class="main-titles lined">
+                            <h2 class="title"><span class="light">محصولات</span> جدید فروشگاه</h2>
+                        </div>
+                    </div>
+                </div> <!-- /title -->
+                
+                <div class="row popup-products blocks-spacer">
+                      
+                     
+                {% block content %}
+                
+                {% for post in posts %}
+                <h2>
+                    <a href="{{ post.get_absolute_url }}">
+                        {{ post.title }}
+                    </a>
+                </h2>
+                <p class="date">
+                    Published {{ post.publish }} by {{ post.author }}
+                </p>
+                <hr>
+                {{ post.body|truncatewords:30|linebreaks }}
+                <hr>
+                {% endfor %}
+                {% include "pagination.html" with page=posts %}
+                {% endblock %}
+                    
+                     
+                     
+                </div>
+            </div>
+        </div> <!-- /new products -->
+        
+        <!--  ==========  -->
+        <!--  = Most Popular products =  -->
+        <!--  ==========  -->
+        <div class="most-popular blocks-spacer">
+            <div class="container">
+                
+                <!--  ==========  -->
+                <!--  = Title =  -->
+                <!--  ==========  -->
+                <div class="row">
+                    <div class="span12">
+                        <div class="main-titles lined">
+                            <h2 class="title"><span class="light">محبوبترین</span>محصولات فروشگاه</h2>
+                        </div>
+                    </div>
+                </div> <!-- /title -->
+                
+                <div class="row popup-products">
+                     
+                     
+                            
+                    <!--  ==========  -->
+                    <!--  = Product =  -->
+                    <!--  ==========  -->
+                    <div class="span3">
+                        <div class="product">
+                            <div class="product-img">
+                                <div class="picture">
+                                    <img src="static/images/dummy/most-popular-products/popular-1.jpg" alt="" width="540" height="412" />
+                                    <div class="img-overlay">
+                                        <a href="#" class="btn more btn-primary">توضیحات بیشتر</a>
+                                        <a href="#" class="btn buy btn-danger">اضافه به سبد خرید</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="main-titles no-margin">
+                                <h4 class="title">$32</h4>
+                                <h5 class="no-margin">محصول ویژه 456</h5>
+                            </div>
+                            <p class="desc">توضیحاتی که در مورد محصول لازم است را در اینجا مینویسید</p>
+                            <p class="center-align stars">
+                                <span class="icon-star stars-clr"></span>
+                                <span class="icon-star stars-clr"></span>
+                                <span class="icon-star"></span>
+                                <span class="icon-star"></span>
+                                <span class="icon-star"></span>
+                                 
+                            </p>
+                        </div>
+                    </div> <!-- /product -->
+                     
+                     
+                            
+                    <!--  ==========  -->
+                    <!--  = Product =  -->
+                    <!--  ==========  -->
+                    <div class="span3">
+                        <div class="product">
+                            <div class="product-img">
+                                <div class="picture">
+                                    <img src="static/images/dummy/most-popular-products/popular-2.jpg" alt="" width="540" height="412" />
+                                    <div class="img-overlay">
+                                        <a href="#" class="btn more btn-primary">توضیحات بیشتر</a>
+                                        <a href="#" class="btn buy btn-danger">اضافه به سبد خرید</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="main-titles no-margin">
+                                <h4 class="title">$32</h4>
+                                <h5 class="no-margin">محصول ویژه 280</h5>
+                            </div>
+                            <p class="desc">توضیحاتی که در مورد محصول لازم است را در اینجا مینویسید</p>
+                            <p class="center-align stars">
+                                <span class="icon-star stars-clr"></span>
+                                <span class="icon-star stars-clr"></span>
+                                <span class="icon-star stars-clr"></span>
+                                <span class="icon-star"></span>
+                                <span class="icon-star"></span>
+                                 
+                            </p>
+                        </div>
+                    </div> <!-- /product -->
+                     
+                     
+                            
+                    <!--  ==========  -->
+                    <!--  = Product =  -->
+                    <!--  ==========  -->
+                    <div class="span3">
+                        <div class="product">
+                            <div class="product-img">
+                                <div class="picture">
+                                    <img src="static/images/dummy/most-popular-products/popular-3.jpg" alt="" width="540" height="412" />
+                                    <div class="img-overlay">
+                                        <a href="#" class="btn more btn-primary">توضیحات بیشتر</a>
+                                        <a href="#" class="btn buy btn-danger">اضافه به سبد خرید</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="main-titles no-margin">
+                                <h4 class="title">$32</h4>
+                                <h5 class="no-margin">محصول ویژه 158</h5>
+                            </div>
+                            <p class="desc">توضیحاتی که در مورد محصول لازم است را در اینجا مینویسید</p>
+                            <p class="center-align stars">
+                                <span class="icon-star stars-clr"></span>
+                                <span class="icon-star"></span>
+                                <span class="icon-star"></span>
+                                <span class="icon-star"></span>
+                                <span class="icon-star"></span>
+                                 
+                            </p>
+                        </div>
+                    </div> <!-- /product -->
+                     
+                     
+                            
+                    <!--  ==========  -->
+                    <!--  = Product =  -->
+                    <!--  ==========  -->
+                    <div class="span3">
+                        <div class="product">
+                            <div class="product-img">
+                                <div class="picture">
+                                    <img src="static/images/dummy/most-popular-products/popular-4.jpg" alt="" width="540" height="412" />
+                                    <div class="img-overlay">
+                                        <a href="#" class="btn more btn-primary">توضیحات بیشتر</a>
+                                        <a href="#" class="btn buy btn-danger">اضافه به سبد خرید</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="main-titles no-margin">
+                                <h4 class="title">$32</h4>
+                                <h5 class="no-margin">محصول ویژه 275</h5>
+                            </div>
+                            <p class="desc">توضیحاتی که در مورد محصول لازم است را در اینجا مینویسید</p>
+                            <p class="center-align stars">
+                                <span class="icon-star stars-clr"></span>
+                                <span class="icon-star"></span>
+                                <span class="icon-star"></span>
+                                <span class="icon-star"></span>
+                                <span class="icon-star"></span>
+                                 
+                            </p>
+                        </div>
+                    </div> <!-- /product -->
+                                </div>
+            </div>
+        </div> <!-- /most popular -->
+        
+        <!--  ==========  -->
+        <!--  = Lastest News =  -->
+        <!--  ==========  -->
+        <div class="darker-stripe blocks-spacer more-space latest-news with-shadows">
+            <div class="container">
+                
+                <!--  ==========  -->
+                <!--  = Title =  -->
+                <!--  ==========  -->
+                <div class="row">
+                    <div class="span12">
+                        <div class="main-titles center-align">
+                            <h2 class="title">
+                                <span class="clickable icon-chevron-right" id="tweetsRight"></span> &nbsp;&nbsp;&nbsp;
+                                <span class="light">آخرین</span> خبر ها &nbsp;&nbsp;&nbsp;
+                                <span class="clickable icon-chevron-left" id="tweetsLeft"></span>
+                            </h2>
+                        </div>
+                    </div>
+                </div> <!-- /title -->
+                
+                <!--  ==========  -->
+                <!--  = News content =  -->
+                <!--  ==========  -->
+                <div class="row">
+                    <div class="span12">
+                        <div class="carouFredSel" data-nav="tweets" data-autoplay="false">
+                             
+                            
+                             
+                            
+                             
+                        </div>
+                    </div>
+                </div> <!-- /news content -->
+            </div>
+        </div> <!-- /latest news -->
+        
+        <!--  ==========  -->
+        <!--  = Brands Carousel =  -->
+        <!--  ==========  -->
+        <div class="container blocks-spacer-last">
+            
+            <!--  ==========  -->
+            <!--  = Title =  -->
+            <!--  ==========  -->
+            <div class="row">
+                <div class="span12">
+                    <div class="main-titles lined">
+                        <h2 class="title"><span class="light">برند های</span> ما</h2>
+                        <div class="arrows">
+                            <a href="#" class="icon-chevron-right" id="brandsRight"></a>
+                            <a href="#" class="icon-chevron-left" id="brandsLeft"></a>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- /title -->
+            
+        
+        
+         
+        <!--  ==========  -->
+        <!--  = Footer =  -->
+        <!--  ==========  -->
+        <footer>
+            
+            <!--  ==========  -->
+            <!--  = Upper footer =  -->
+            <!--  ==========  -->
+            <div class="foot-light">
+                <div class="container">
+                    <div class="row">
+                        
+                        
+                    </div>
+                </div>
+            </div> <!-- /upper footer -->
+            
+            <!--  ==========  -->
+            <!--  = Middle footer =  -->
+            <!--  ==========  -->
+            <div class="foot-dark">
+                <div class="container">
+                    <div class="row">
+                        
+                        <!--  ==========  -->
+                        <!--  = Menu 1 =  -->
+                        <!--  ==========  -->
+                        <div class="span3">
+                            <div class="main-titles lined">
+                                <h3 class="title"><span class="light">تماس با ما</span> </h3>
+                            </div>
+                            <ul class="nav bold">
+                                <li><a href="#">شماره تماس : 09382702517 </a></li>
+                                <li><a href="#">ایمیل : pm.danial@gmail.com </a></li>
+                                <li><a href="#">آدرس : گیلان - آستارا </a></li>
+                                
+                            </ul>
+                        </div>
+                        
+                       
+                        
+                    
+        
+        <!--  ==========  -->
+        <!--  = Modal Windows =  -->
+        <!--  ==========  -->
+        
+        <!--  = Login =  -->
+        <div id="loginModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="loginModalLabel"><span class="light">ورود</span> در وبمارکت</h3>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="#">
+                    <div class="control-group">
+                        <label class="control-label hidden shown-ie8" for="inputEmail">نام کاربری</label>
+                        <div class="controls">
+                            <input type="text" class="input-block-level" id="inputEmail" placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label hidden shown-ie8" for="inputPassword">رمز عبور</label>
+                        <div class="controls">
+                            <input type="password" class="input-block-level" id="inputPassword" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <label class="checkbox">
+                                <input type="checkbox">
+                                مرا به خاطر بسپار
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary input-block-level bold higher">
+                        ورود
+                    </button>
+                </form>
+                <p class="center-align push-down-0">
+                    <a href="#" data-dismiss="modal">رمز عبورتان را فراموش کرده اید؟</a>
+                </p>
+            </div>
+        </div>
+        
+        <!--  = Register =  -->
+        <div id="registerModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="registerModalLabel"><span class="light">ثبت نام</span> در وبمارکت</h3>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="#">
+                    <div class="control-group">
+                        <label class="control-label hidden shown-ie8" for="inputUsernameRegister">نام کاربری</label>
+                        <div class="controls">
+                            <input type="text" class="input-block-level" id="inputUsernameRegister" placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label hidden shown-ie8" for="inputEmailRegister">ایمیل</label>
+                        <div class="controls">
+                            <input type="email" class="input-block-level" id="inputEmailRegister" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label hidden shown-ie8" for="inputPasswordRegister">رمز عبور</label>
+                        <div class="controls">
+                            <input type="password" class="input-block-level" id="inputPasswordRegister" placeholder="Password">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-danger input-block-level bold higher">
+                        ثبت نام
+                    </button>
+                </form>
+                <p class="center-align push-down-0">
+                    <a data-toggle="modal" role="button" href="#loginModal" data-dismiss="modal">قبلا ثبت نام کرده اید؟</a>
+                </p>
+                
+            </div>
+        </div>
+        
+         
+        </div> <!-- end of master-wrapper -->
+        
+    
+    
+        <!--  ==========  -->
+        <!--  = JavaScript =  -->
+        <!--  ==========  -->
+        
+        <!--  = FB =  -->
+        
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=126780447403102";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+        
+        
+        <!--  = jQuery - CDN with local fallback =  -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript">
+        if (typeof jQuery == 'undefined') {
+            document.write('<script src="js/jquery.min.js"><\/script>');
+        }
+        </script>
+        
+        <!--  = _ =  -->
+        <script src="static/js/underscore/underscore-min.js" type="text/javascript"></script>
+        
+        <!--  = Bootstrap =  -->
+        <script src="static/js/bootstrap.min.js" type="text/javascript"></script>
+        
+        <!--  = Slider Revolution =  -->
+        <script src="static/js/rs-plugin/pluginsources/jquery.themepunch.plugins.min.js" type="text/javascript"></script>
+        <script src="static/js/rs-plugin/js/jquery.themepunch.revolution.min.js" type="text/javascript"></script>
+        
+        <!--  = CarouFredSel =  -->
+        <script src="static/js/jquery.carouFredSel-6.2.1-packed.js" type="text/javascript"></script>
+        
+        <!--  = jQuery UI =  -->
+        <script src="static/js/jquery-ui-1.10.3/js/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+        <script src="static/js/jquery-ui-1.10.3/touch-fix.min.js" type="text/javascript"></script>
+        
+        <!--  = Isotope =  -->
+        <script src="static/js/isotope/jquery.isotope.min.js" type="text/javascript"></script>
+        
+        <!--  = Tour =  -->
+        <script src="static/js/bootstrap-tour/build/js/bootstrap-tour.min.js" type="text/javascript"></script>
+        
+        <!--  = PrettyPhoto =  -->
+        <script src="static/js/prettyphoto/js/jquery.prettyPhoto.js" type="text/javascript"></script>
+        
+        <!--  = Google Maps API =  -->
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+        <script type="text/javascript" src="static/js/goMap/js/jquery.gomap-1.3.2.min.js"></script>
+        
+        <!--  = Custom JS =  -->
+        <script src="static/js/custom.js" type="text/javascript"></script>
+</body>
+
+</html>

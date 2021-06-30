@@ -5,9 +5,17 @@
 <head>
     <title>{% block title %}{% endblock %}</title>
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+    <link href="{% static 'css/oil-green.css' %}" rel="stylesheet">
+    <link href="{% static 'css/grass-green.css' %}" rel="stylesheet">
 </head>
 
+
 <body>
+
+
+
     <div class="master-wrapper">
      
         <!--  ==========  -->
@@ -21,14 +29,59 @@
                     <!--  = Logo =  -->
                     <!--  ==========  -->
                     <div class="span7">
-                        <a class="brand" href="">
+                        <a class="brand" href="index.html">
                             <img src="static/images/logo.png" alt="Webmarket Logo" width="48" height="48" /> 
                             <span class="pacifico">کفش فروش</span> 
                             <span class="tagline">قالب فروشگاهی HTML قدرتمند</span> 
                         </a>
                     </div>
                     
-                    
+                    <!--  ==========  -->
+                    <!--  = Social Icons =  -->
+                    <!--  ==========  -->
+                    <div class="span5">
+                        <div class="topmost-line">
+                            <div class="lang-currency">
+                                <div class="dropdown js-selectable-dropdown">
+                                    <a data-toggle="dropdown" class="selected" href="#"><span class="js-change-text"><i class="famfamfam-flag-gb"></i> انگلیسی (EN)</span> <b class="caret"></b></a>
+                                    <!-- for all available country flags look the styles in lib/components/_flags.scss -->
+                                    <ul class="dropdown-menu js-possibilities" role="menu" aria-labelledby="dLabel">
+                                        <li><a href="#"><i class="famfamfam-flag-gb"></i> انگلیسی (EN)</a></li>
+                                        <li><a href="#"><i class="famfamfam-flag-si"></i> اسلوانیایی (SI)</a></li>
+                                        <li><a href="#"><i class="famfamfam-flag-de"></i> آلمانی (DE)</a></li>
+                                        <li><a href="#"><i class="famfamfam-flag-fr"></i> فرانسوی (FR)</a></li>
+                                        <li><a href="#"><i class="famfamfam-flag-es"></i> اسپانیولی (ES)</a></li>
+                                    </ul>
+                                </div>
+                                <div class="dropdown js-selectable-dropdown">
+                                    <a data-toggle="dropdown" class="selected" href="#"><span class="js-change-text">USD ($)</span> <b class="caret"></b></a>
+                                    <ul class="dropdown-menu js-possibilities" role="menu" aria-labelledby="dLabel">
+                                        <li><a href="#">USD ($)</a></li>
+                                        <li><a href="#">EUR (€)</a></li>
+                                        <li><a href="#">YEN (¥)</a></li>
+                                        <li><a href="#">GBP (£)</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="top-right">
+                            <div class="icons">
+                                <a href="#"><span class="zocial-facebook"></span></a>
+                                <a href="#"><span class="zocial-skype"></span></a>
+                                <a href="#"><span class="zocial-twitter"></span></a>
+                                <a href="#"><span class="zocial-rss"></span></a>
+                                <a href="#"><span class="zocial-wordpress"></span></a>
+                                <a href="#"><span class="zocial-android"></span></a>
+                                <a href="#"><span class="zocial-html5"></span></a>
+                                <a href="#"><span class="zocial-windows"></span></a>
+                                <a href="#"><span class="zocial-apple"></span></a>
+                            </div>
+                            <div class="register">
+                                <a href="#loginModal" role="button" data-toggle="modal">ورود</a> یا  
+                                <a href="#registerModal" role="button" data-toggle="modal">ثبت نام</a>
+                            </div>
+                        </div>
+                    </div> <!-- /social icons -->
                 </div>
             </div>
         </header>
@@ -53,12 +106,12 @@
                     <div class="nav-collapse collapse">
                       <ul class="nav" id="mainNavigation">
                         <li class="dropdown active">
-                            <a href="" class="dropdown-toggle"> خانه <b class="caret"></b> </a>
+                            <a href="index.html" class="dropdown-toggle"> خانه <b class="caret"></b> </a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown active">
-                                    <a href=""><i class="icon-caret-left pull-right visible-desktop"></i> رنگ های پوسته</a>
+                                    <a href="index.html"><i class="icon-caret-left pull-right visible-desktop"></i> رنگ های پوسته</a>
                                     <ul class="dropdown-menu">
-                                        <li class="active"><a href="">پوسته پیش فرض</a></li>
+                                        <li class="active"><a href="index.html">پوسته پیش فرض</a></li>
                                         <li><a href="index-grass-green.html">پوسته سبز چمنی</a></li>
                                         <li><a href="index-oil-green.html">پوسته سبز روغنی</a></li>
                                         <li><a href="index-gray.html">پوسته خاکستری</a></li>
@@ -522,245 +575,7 @@
             <!--  ==========  -->
             <!--  = Featured Items =  -->
             <!--  ==========  -->
-            <div class="row featured-items blocks-spacer">
-                <div class="span12">
-                    
-                    <!--  ==========  -->
-                    <!--  = Title =  -->
-                    <!--  ==========  -->
-                    <div class="main-titles lined">
-                        <h2 class="title"><span class="light">محصولات</span> ویژه</h2>
-                        <div class="arrows">
-                            <a href="#" class="icon-chevron-right" id="featuredItemsRight"></a>
-                            <a href="#" class="icon-chevron-left" id="featuredItemsLeft"></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="span12">
-                    <!--  ==========  -->
-                    <!--  = Carousel =  -->
-                    <!--  ==========  -->
-                    <div class="carouFredSel" data-autoplay="false" data-nav="featuredItems">
-                        <div class="slide">
-                            <div class="row">
-                             
-                             
-                            
-                             
-                                        
-                            <!--  ==========  -->
-                            <!--  = Product =  -->
-                            <!--  ==========  -->
-                            <div class="span4">
-                                <div class="product">
-                                    <div class="product-img featured">
-                                        <div class="picture">
-                                            <img src="static/images/dummy/featured-products/featured-1.png" alt="" width="518" height="358" />
-                                            <div class="img-overlay">
-                                                <a href="#" class="btn more btn-primary">توضیحات بیشتر</a>
-                                                <a href="#" class="btn buy btn-danger">خرید</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="main-titles">
-                                        <h4 class="title">$115</h4>
-                                        <h5 class="no-margin">محصول ویژه 652</h5>
-                                    </div>
-                                    <p class="desc">توضیحاتی که در مورد محصول لازم است را در اینجا مینویسید</p>
-                                    <p class="center-align stars">
-                                        <span class="icon-star stars-clr"></span>
-                                        <span class="icon-star stars-clr"></span>
-                                        <span class="icon-star stars-clr"></span>
-                                        <span class="icon-star stars-clr"></span>
-                                        <span class="icon-star stars-clr"></span>
-                                         
-                                    </p>
-                                </div>
-                              </div> <!-- /product -->
-                             
-                             
-                            
-                             
-                                        
-                            <!--  ==========  -->
-                            <!--  = Product =  -->
-                            <!--  ==========  -->
-                            <div class="span4">
-                                <div class="product">
-                                    <div class="product-img featured">
-                                        <div class="picture">
-                                            <img src="static/images/dummy/featured-products/featured-2.png" alt="" width="518" height="358" />
-                                            <div class="img-overlay">
-                                                <a href="#" class="btn more btn-primary">توضیحات بیشتر</a>
-                                                <a href="#" class="btn buy btn-danger">خرید</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="main-titles">
-                                        <h4 class="title">$91</h4>
-                                        <h5 class="no-margin">محصول ویژه 735</h5>
-                                    </div>
-                                    <p class="desc">توضیحاتی که در مورد محصول لازم است را در اینجا مینویسید</p>
-                                    <p class="center-align stars">
-                                        <span class="icon-star stars-clr"></span>
-                                        <span class="icon-star"></span>
-                                        <span class="icon-star"></span>
-                                        <span class="icon-star"></span>
-                                        <span class="icon-star"></span>
-                                         
-                                    </p>
-                                </div>
-                              </div> <!-- /product -->
-                             
-                             
-                            
-                             
-                                        
-                            <!--  ==========  -->
-                            <!--  = Product =  -->
-                            <!--  ==========  -->
-                            <div class="span4">
-                                <div class="product">
-                                    <div class="product-img featured">
-                                        <div class="picture">
-                                            <img src="static/images/dummy/featured-products/featured-3.png" alt="" width="518" height="358" />
-                                            <div class="img-overlay">
-                                                <a href="#" class="btn more btn-primary">توضیحات بیشتر</a>
-                                                <a href="#" class="btn buy btn-danger">خرید</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="main-titles">
-                                        <h4 class="title">$40</h4>
-                                        <h5 class="no-margin">محصول ویژه 387</h5>
-                                    </div>
-                                    <p class="desc">توضیحاتی که در مورد محصول لازم است را در اینجا مینویسید</p>
-                                    <p class="center-align stars">
-                                        <span class="icon-star stars-clr"></span>
-                                        <span class="icon-star stars-clr"></span>
-                                        <span class="icon-star stars-clr"></span>
-                                        <span class="icon-star stars-clr"></span>
-                                        <span class="icon-star"></span>
-                                         
-                                    </p>
-                                </div>
-                              </div> <!-- /product -->
-                             
-                             
-                            
-                             
-                            </div>
-                        </div>
-                        <div class="slide">
-                            <div class="row">
-                             
-                                        
-                            <!--  ==========  -->
-                            <!--  = Product =  -->
-                            <!--  ==========  -->
-                            <div class="span4">
-                                <div class="product">
-                                    <div class="product-img featured">
-                                        <div class="picture">
-                                            <img src="static/images/dummy/featured-products/featured-1.png" alt="" width="518" height="358" />
-                                            <div class="img-overlay">
-                                                <a href="#" class="btn more btn-primary">توضیحات بیشتر</a>
-                                                <a href="#" class="btn buy btn-danger">خرید</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="main-titles">
-                                        <h4 class="title">$41</h4>
-                                        <h5 class="no-margin">محصول ویژه 515</h5>
-                                    </div>
-                                    <p class="desc">توضیحاتی که در مورد محصول لازم است را در اینجا مینویسید</p>
-                                    <p class="center-align stars">
-                                        <span class="icon-star stars-clr"></span>
-                                        <span class="icon-star stars-clr"></span>
-                                        <span class="icon-star stars-clr"></span>
-                                        <span class="icon-star stars-clr"></span>
-                                        <span class="icon-star stars-clr"></span>
-                                         
-                                    </p>
-                                </div>
-                              </div> <!-- /product -->
-                             
-                             
-                            
-                             
-                                        
-                            <!--  ==========  -->
-                            <!--  = Product =  -->
-                            <!--  ==========  -->
-                            <div class="span4">
-                                <div class="product">
-                                    <div class="product-img featured">
-                                        <div class="picture">
-                                            <img src="static/images/dummy/featured-products/featured-2.png" alt="" width="518" height="358" />
-                                            <div class="img-overlay">
-                                                <a href="#" class="btn more btn-primary">توضیحات بیشتر</a>
-                                                <a href="#" class="btn buy btn-danger">خرید</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="main-titles">
-                                        <h4 class="title">$107</h4>
-                                        <h5 class="no-margin">محصول ویژه 690</h5>
-                                    </div>
-                                    <p class="desc">توضیحاتی که در مورد محصول لازم است را در اینجا مینویسید</p>
-                                    <p class="center-align stars">
-                                        <span class="icon-star stars-clr"></span>
-                                        <span class="icon-star stars-clr"></span>
-                                        <span class="icon-star"></span>
-                                        <span class="icon-star"></span>
-                                        <span class="icon-star"></span>
-                                         
-                                    </p>
-                                </div>
-                              </div> <!-- /product -->
-                             
-                             
-                            
-                             
-                                        
-                            <!--  ==========  -->
-                            <!--  = Product =  -->
-                            <!--  ==========  -->
-                            <div class="span4">
-                                <div class="product">
-                                    <div class="product-img featured">
-                                        <div class="picture">
-                                            <img src="static/images/dummy/featured-products/featured-3.png" alt="" width="518" height="358" />
-                                            <div class="img-overlay">
-                                                <a href="#" class="btn more btn-primary">توضیحات بیشتر</a>
-                                                <a href="#" class="btn buy btn-danger">خرید</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="main-titles">
-                                        <h4 class="title">$61</h4>
-                                        <h5 class="no-margin">محصول ویژه 405</h5>
-                                    </div>
-                                    <p class="desc">توضیحاتی که در مورد محصول لازم است را در اینجا مینویسید</p>
-                                    <p class="center-align stars">
-                                        <span class="icon-star stars-clr"></span>
-                                        <span class="icon-star stars-clr"></span>
-                                        <span class="icon-star stars-clr"></span>
-                                        <span class="icon-star"></span>
-                                        <span class="icon-star"></span>
-                                         
-                                    </p>
-                                </div>
-                              </div> <!-- /product -->
-                                                    </div> 
-                        </div>
-                    </div> <!-- /carousel -->
-                </div>
-                
-            </div>
-        </div> <!-- /container -->
-        
+         
         <!--  ==========  -->
         <!--  = New Products =  -->
         <!--  ==========  -->
@@ -1226,51 +1041,9 @@
                     <div class="span12">
                         <div class="carouFredSel" data-nav="tweets" data-autoplay="false">
                              
-                                
-                            <!--  ==========  -->
-                            <!--  = Slide =  -->
-                            <!--  ==========  --> 
-                            <div class="slide">
-                                <div class="row">
-                                    <div class="span6">
-                                        <div class="news-item">
-                                            <div class="published">12 بهمن 1392</div>
-                                            <h6><a href="#">عنوان خبر شما</a></h6>
-                                            <p>در این قسمت میتوانید خبر خود را بنویسید. این یک نوشته ی آزمایشی است که صرفا برای پر کردن این بخش به کار رفته و جنبه ی دیگری ندارد. شما میتوانید این ناحیه را با محتوای دلخواه خود پر کنید.</p>
-                                        </div>
-                                    </div>
-                                    <div class="span6">
-                                        <div class="news-item">
-                                            <div class="published">15 بهمن 1392</div>
-                                            <h6><a href="#">یک خبر جالب دیگر</a></h6>
-                                            <p>در این قسمت میتوانید خبر خود را بنویسید. این یک نوشته ی آزمایشی است که صرفا برای پر کردن این بخش به کار رفته و جنبه ی دیگری ندارد. شما میتوانید این ناحیه را با محتوای دلخواه خود پر کنید.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> <!-- /slide -->
+                            
                              
-                                
-                            <!--  ==========  -->
-                            <!--  = Slide =  -->
-                            <!--  ==========  --> 
-                            <div class="slide">
-                                <div class="row">
-                                    <div class="span6">
-                                        <div class="news-item">
-                                            <div class="published">12 بهمن 1392</div>
-                                            <h6><a href="#">عنوان خبر شما</a></h6>
-                                            <p>در این قسمت میتوانید خبر خود را بنویسید. این یک نوشته ی آزمایشی است که صرفا برای پر کردن این بخش به کار رفته و جنبه ی دیگری ندارد. شما میتوانید این ناحیه را با محتوای دلخواه خود پر کنید.</p>
-                                        </div>
-                                    </div>
-                                    <div class="span6">
-                                        <div class="news-item">
-                                            <div class="published">15 بهمن 1392</div>
-                                            <h6><a href="#">یک خبر جالب دیگر</a></h6>
-                                            <p>در این قسمت میتوانید خبر خود را بنویسید. این یک نوشته ی آزمایشی است که صرفا برای پر کردن این بخش به کار رفته و جنبه ی دیگری ندارد. شما میتوانید این ناحیه را با محتوای دلخواه خود پر کنید.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> <!-- /slide -->
+                            
                              
                         </div>
                     </div>
@@ -1298,24 +1071,7 @@
                 </div>
             </div> <!-- /title -->
             
-            <!--  ==========  -->
-            <!--  = Logos =  -->
-            <!--  ==========  -->
-            <div class="row">
-                <div class="span12">
-                    <div class="brands carouFredSel" data-nav="brands" data-autoplay="true">
-                        <img src="static/images/dummy/brands/brands_01.jpg" alt="" width="203" height="104" />
-                        <img src="static/images/dummy/brands/brands_02.jpg" alt="" width="203" height="104" />
-                        <img src="static/images/dummy/brands/brands_03.jpg" alt="" width="203" height="104" />
-                        <img src="static/images/dummy/brands/brands_04.jpg" alt="" width="203" height="104" />
-                        <img src="static/images/dummy/brands/brands_05.jpg" alt="" width="203" height="104" />
-                        <img src="static/images/dummy/brands/brands_06.jpg" alt="" width="203" height="104" />
-                    </div>
-                </div>
-            </div> <!-- /logos -->
-        </div> <!-- /brands carousel -->
         
-         
         
          
         <!--  ==========  -->
@@ -1329,41 +1085,8 @@
             <div class="foot-light">
                 <div class="container">
                     <div class="row">
-                        <div class="span4">
-                            <h2 class="pacifico">Webmarket &nbsp; <img src="images/webmarket.png" alt="Webmarket Cart" class="align-baseline" /></h2>
-                            <p>این یک نوشته آزمایشی است. شما میتوانید این قسمت را با نوشته های دلخواه خود که مناسب این ناحیه باشند پر نمایید. ما این بخش را با نوشته هایی بی معنی پر کرده ایم.</p>
-                        </div>
-                        <div class="span4">
-                            <div class="main-titles lined">
-                                <h3 class="title">فیسبوک</h3>
-                            </div>
-                            <div class="bordered">
-                                <div class="fill-iframe">
-                                    <div class="fb-like-box" data-href="https://www.facebook.com/ProteusNet" data-width="292" data-height="200" data-colorscheme="dark" data-show-faces="true" data-header="false" data-stream="false" data-show-border="false"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="span4">
-                            <div class="main-titles lined">
-                                <h3 class="title"><span class="light">عضویت</span> در خبرنامه</h3>
-                            </div>
-                            <p>این بخشی از یک نوشتار آزمایشی صرفا برای پر کردن این ناحیه است.</p>
-                            <!-- Begin MailChimp Signup Form -->
-                            <div id="mc_embed_signup">
-                            <form action="http://acdev.us4.list-manage1.com/subscribe/post?u=ea0786485977f5ec8c9283d5c&amp;id=5dad3f35e9" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate form form-inline" target="_blank" novalidate>
-                                <div class="mc-field-group">
-                                    <input type="email" value="" placeholder="آدرس ایمیلتان را وارد کنید" name="EMAIL" class="required email" id="mce-EMAIL">
-                                    <input type="submit" value="ارسال" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary">
-                                </div>
-                                <div id="mce-responses" class="clear">
-                                    <div class="response" id="mce-error-response" style="display:none"></div>
-                                    <div class="response" id="mce-success-response" style="display:none"></div>
-                                </div>
-                                
-                            </form>
-                            </div>
-                            <!--End mc_embed_signup-->
-                        </div>
+                        
+                        
                     </div>
                 </div>
             </div> <!-- /upper footer -->
@@ -1380,96 +1103,19 @@
                         <!--  ==========  -->
                         <div class="span3">
                             <div class="main-titles lined">
-                                <h3 class="title"><span class="light">ناوبری</span> اصلی</h3>
+                                <h3 class="title"><span class="light">تماس با ما</span> </h3>
                             </div>
                             <ul class="nav bold">
-                                <li><a href="#">خانه</a></li>
-                                <li><a href="#">صفحات</a></li>
-                                <li><a href="#">درباره ما</a></li>
-                                <li><a href="#">کد های میانبر</a></li>
-                                <li><a href="#">گالری</a></li>
-                                <li><a href="#">تماس با ما</a></li>
+                                <li><a href="#">شماره تماس : 09382702517 </a></li>
+                                <li><a href="#">ایمیل : pm.danial@gmail.com </a></li>
+                                <li><a href="#">آدرس : گیلان - آستارا </a></li>
+                                
                             </ul>
                         </div>
                         
-                        <!--  ==========  -->
-                        <!--  = Menu 2 =  -->
-                        <!--  ==========  -->
-                        <div class="span3">
-                            <div class="main-titles lined">
-                                <h3 class="title"><span class="light">دومین</span> ناوبری</h3>
-                            </div>
-                            <ul class="nav">
-                                <li><a href="#">پیوند نوشتار آزمایشی</a></li>
-                                <li><a href="#">نوشتار آزمایشی دیگر</a></li>
-                                <li><a href="#">برند ها</a></li>
-                                <li><a href="#">مشاهده آخرین توییت ها</a></li>
-                                <li><a href="#">نوشتار آزمایشی دیگر</a></li>
-                            </ul>
-                        </div>
+                       
                         
-                        <!--  ==========  -->
-                        <!--  = Menu 3 =  -->
-                        <!--  ==========  -->
-                        <div class="span3">
-                            <div class="main-titles lined">
-                                <h3 class="title"><span class="light">سومین</span> ناوبری</h3>
-                            </div>
-                            <ul class="nav">
-                                <li><a href="#">پیوند نوشتار آزمایشی</a></li>
-                                <li><a href="#">نوشتار آزمایشی دیگر</a></li>
-                                <li><a href="#">برند ها</a></li>
-                                <li><a href="#">مشاهده آخرین توییت ها</a></li>
-                                <li><a href="#">نوشتار آزمایشی دیگر</a></li>
-                            </ul>
-                        </div>
-                        
-                        <!--  ==========  -->
-                        <!--  = Menu 4 =  -->
-                        <!--  ==========  -->
-                        <div class="span3">
-                            <div class="main-titles lined">
-                                <h3 class="title"><span class="light">چهارمین</span> ناوبری</h3>
-                            </div>
-                            <ul class="nav">
-                                <li><a href="#">پیوند نوشتار آزمایشی</a></li>
-                                <li><a href="#">نوشتار آزمایشی دیگر</a></li>
-                                <li><a href="#">برند ها</a></li>
-                                <li><a href="#">مشاهده آخرین توییت ها</a></li>
-                                <li><a href="#">نوشتار آزمایشی دیگر</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="cpContainter">
-                <div class="mcopyright">
-                  <div class="inside">فارسی سازی و ویرایش توسط <a href="http://mrcode.ir" target="_blank" title="مِستِر کُد">MrCode.ir</a></div>
-                </div>
-                </div>
-                
-            </div> <!-- /middle footer -->
-            
-            <!--  ==========  -->
-            <!--  = Bottom Footer =  -->
-            <!--  ==========  -->
-            <div class="foot-last">
-                <a href="#" id="toTheTop">
-                    <span class="icon-chevron-up"></span>
-                </a>
-                <div class="container">
-                    <div class="row">
-                        <div class="span6">
-                            &copy; Copyright 2013. Images of products by <a target="_blank" href="http://www.acdev.ir/">محصول ویژه</a>.
-                        </div>
-                        <div class="span6">
-                            <div class="pull-right">قالب HTML وبمارکت توسط<a href="http://www.acdev.ir">acdev</a></div>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- /bottom footer -->
-        </footer> <!-- /footer -->
-        
+                    
         
         <!--  ==========  -->
         <!--  = Modal Windows =  -->
